@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AETHER — 3D Rotation</title>
+<script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: #000;
+    color: #fff;
+    overflow-x: hidden;
+  }
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 1000;
+    padding: 24px 48px; display: flex; justify-content: space-between; align-items: center;
+    mix-blend-mode: difference;
+  }
+  .logo { font-size: 16px; letter-spacing: 10px; font-weight: 300; }
+  .nav-links a { color: #fff; text-decoration: none; margin-left: 32px; font-size: 11px; letter-spacing: 3px; }
+  .hero { height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; }
+  .hero h1 { font-size: clamp(50px, 12vw, 140px); font-weight: 200; letter-spacing: 18px; position: absolute; top: 18%; z-index: 2; pointer-events: none; opacity: 0; animation: fadeIn 1.5s ease forwards 0.3s; }
+  @keyframes fadeIn { to { opacity: 1; } }
+  model-viewer { width: 100%; height: 100vh; background: transparent; --poster-color: transparent; }
+  .scroll-hint { position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); font-size: 11px; letter-spacing: 6px; opacity: 0.5; z-index: 2; }
+  .section { min-height: 100vh; display: flex; align-items: center; padding: 0 8vw; }
+  .section h2 { font-size: clamp(40px, 7vw, 90px); font-weight: 200; line-height: 1; letter-spacing: -1px; }
+  .section p { max-width: 500px; margin-top: 24px; color: #aaa; font-weight: 300; line-height: 1.8; font-size: 17px; }
+  .reveal { opacity: 0; transform: translateY(50px); transition: all 1s cubic-bezier(0.16, 1, 0.3, 1); }
+  .reveal.active { opacity: 1; transform: translateY(0); }
+  .cta { height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+  .cta h2 { font-size: clamp(40px, 6vw, 80px); font-weight: 200; letter-spacing: 10px; margin-bottom: 32px; }
+  .btn { padding: 18px 50px; border: 1px solid #fff; color: #fff; text-decoration: none; letter-spacing: 5px; font-size: 12px; transition: 0.4s; }
+  .btn:hover { background: #fff; color: #000; }
+  footer { padding: 30px; text-align: center; font-size: 10px; letter-spacing: 3px; color: #444; }
+  @media (max-width: 768px) { .nav-links { display: none; } .hero h1 { top: 12%; font-size: 48px; letter-spacing: 8px; } }
+</style>
+</head>
+<body>
+<nav>
+  <div class="logo">AETHER</div>
+  <div class="nav-links"><a href="#model">3D MODEL</a><a href="#about">ABOUT</a></div>
+</nav>
+<section class="hero" id="model">
+  <h1>AETHER</h1>
+  <model-viewer id="carModel" src="https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Assets/main/Models/CarConcept/glTF-Binary/CarConcept.glb" alt="AETHER Concept Car" camera-controls auto-rotate auto-rotate-delay="0" rotation-per-second="20deg" shadow-intensity="1" exposure="1.2" environment-image="neutral" camera-orbit="0deg 75deg 8m" min-camera-orbit="auto auto 4m" max-camera-orbit="auto auto 15m" interaction-prompt="none"></model-viewer>
+  <div class="scroll-hint">DRAG TO ROTATE · SCROLL TO EXPLORE</div>
+</section>
+<section class="section" id="about">
+  <div class="reveal">
+    <h2>TRUE 3D<br>ROTATION</h2>
+    <p>本物の3Dモデルが回転しています。ドラッグで自由に角度を変え、スクロールでサイト全体を探索できます。</p>
+  </div>
+</section>
+<section class="cta">
+  <h2 class="reveal">RESERVE</h2>
+  <a href="#" class="btn reveal">REQUEST ACCESS</a>
+</section>
+<footer>AETHER © 2026 — REAL 3D MODEL DEMO</footer>
+<script>
+const observer = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('active'); }); }, { threshold: 0.25 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
