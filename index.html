@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio Sites</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: #0a0a0a;
+    color: #fff;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+  }
+  h1 {
+    font-size: clamp(32px, 6vw, 56px);
+    font-weight: 200;
+    letter-spacing: 8px;
+    margin-bottom: 16px;
+  }
+  .sub {
+    font-size: 14px;
+    letter-spacing: 3px;
+    color: #888;
+    margin-bottom: 60px;
+  }
+  .projects {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    width: 100%;
+    max-width: 480px;
+  }
+  a.project {
+    display: block;
+    padding: 28px 32px;
+    border: 1px solid #333;
+    text-decoration: none;
+    color: #fff;
+    transition: all 0.3s;
+  }
+  a.project:hover {
+    border-color: #fff;
+    background: #111;
+  }
+  a.project h2 {
+    font-size: 20px;
+    font-weight: 300;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+  }
+  a.project p {
+    font-size: 13px;
+    color: #888;
+    font-weight: 300;
+  }
+  footer {
+    margin-top: 80px;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: #555;
+  }
+</style>
+</head>
+<body>
+  <h1>PORTFOLIO</h1>
+  <div class="sub">WEB DESIGN CASE STUDIES</div>
+  <div class="projects">
+    <a class="project" href="aether_3d.html">
+      <h2>AETHER — 3D</h2>
+      <p>本物の3Dモデルが回転するラグジュアリー車サイト</p>
+    </a>
+    <a class="project" href="chronos_clock.html">
+      <h2>CHRONOS — Living Time</h2>
+      <p>リアルタイムで針が動く高級時計サイト</p>
+    </a>
+  </div>
+  <footer>DESIGN EXPERIMENTS © 2026</footer>
+</body>
+</html>
