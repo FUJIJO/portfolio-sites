@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CHRONOS — Living Time</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=Inter:wght@200;300;400&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Inter', sans-serif; background: #0c0c0c; color: #f0f0f0; overflow-x: hidden; }
+  nav { position: fixed; top: 0; width: 100%; z-index: 1000; padding: 28px 50px; display: flex; justify-content: space-between; align-items: center; mix-blend-mode: difference; }
+  .logo { font-family: 'Cormorant Garamond', serif; font-size: 22px; letter-spacing: 8px; }
+  .nav-links a { color: #fff; text-decoration: none; margin-left: 36px; font-size: 11px; letter-spacing: 3px; }
+  .hero { height: 100vh; display: flex; align-items: center; justify-content: center; background: radial-gradient(ellipse at center, #1a1a1a 0%, #000 70%); }
+  .hero-content { text-align: center; }
+  .hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(60px, 10vw, 120px); font-weight: 300; letter-spacing: 12px; }
+  .hero .sub { margin-top: 16px; font-size: 13px; letter-spacing: 8px; font-weight: 300; }
+  .clock-section { height: 100vh; display: flex; align-items: center; justify-content: center; background: #000; position: relative; }
+  .clock-container { position: relative; width: min(70vw, 600px); height: min(70vw, 600px); }
+  .clock-face { width: 100%; height: 100%; border-radius: 50%; background: radial-gradient(circle at center, #1a1a1a 0%, #0a0a0a 70%); border: 8px solid #c9a96e; box-shadow: 0 0 80px rgba(201, 169, 110, 0.15), inset 0 0 40px rgba(0,0,0,0.8); position: relative; }
+  .marker { position: absolute; width: 2px; height: 18px; background: #c9a96e; left: 50%; top: 12px; transform-origin: center 280px; }
+  .hand { position: absolute; left: 50%; bottom: 50%; transform-origin: bottom center; background: #c9a96e; border-radius: 2px; }
+  .hour-hand { width: 6px; height: 28%; margin-left: -3px; background: linear-gradient(to top, #c9a96e, #f0e6d0); }
+  .minute-hand { width: 4px; height: 38%; margin-left: -2px; background: linear-gradient(to top, #ddd, #fff); }
+  .second-hand { width: 2px; height: 42%; margin-left: -1px; background: #e74c3c; }
+  .center-dot { position: absolute; width: 16px; height: 16px; background: #c9a96e; border-radius: 50%; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: 10; }
+  .clock-label { position: absolute; bottom: -60px; left: 50%; transform: translateX(-50%); font-size: 12px; letter-spacing: 6px; color: #888; white-space: nowrap; }
+  .section { min-height: 60vh; display: flex; align-items: center; padding: 0 8vw; }
+  .section h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(36px, 5vw, 64px); font-weight: 300; line-height: 1.1; margin-bottom: 20px; }
+  .section p { max-width: 500px; color: #aaa; font-weight: 300; line-height: 1.8; }
+  footer { padding: 40px; text-align: center; font-size: 11px; letter-spacing: 3px; color: #555; }
+  @media (max-width: 768px) { .nav-links { display: none; } .clock-container { width: 80vw; height: 80vw; } }
+</style>
+</head>
+<body>
+<nav><div class="logo">CHRONOS</div><div class="nav-links"><a href="#clock">LIVING TIME</a></div></nav>
+<section class="hero"><div class="hero-content"><h1>CHRONOS</h1><div class="sub">TIME, PERFECTED</div></div></section>
+<section class="clock-section" id="clock">
+  <div class="clock-container">
+    <div class="clock-face" id="clockFace">
+      <div class="hand hour-hand" id="hour"></div>
+      <div class="hand minute-hand" id="minute"></div>
+      <div class="hand second-hand" id="second"></div>
+      <div class="center-dot"></div>
+    </div>
+    <div class="clock-label">LIVING TIME</div>
+  </div>
+</section>
+<section class="section"><div><h2>Every second<br>counts.</h2><p>針は止まらない。CHRONOSのムーブメントは、時を刻むたびに静かに美しく動き続けます。</p></div></section>
+<footer>CHRONOS © 2026 — LIVING TIME</footer>
+<script>
+const face = document.getElementById('clockFace');
+for (let i = 0; i < 60; i++) {
+  const marker = document.createElement('div');
+  marker.className = 'marker';
+  marker.style.transform = `rotate(${i * 6}deg)`;
+  if (i % 5 === 0) { marker.style.height = '22px'; marker.style.width = '3px'; marker.style.background = '#e8d5b0'; }
+  face.appendChild(marker);
+}
+function updateClock() {
+  const now = new Date();
+  const hours = now.getHours() % 12, minutes = now.getMinutes(), seconds = now.getSeconds(), ms = now.getMilliseconds();
+  document.getElementById('second').style.transform = `rotate(${(seconds + ms/1000)*6}deg)`;
+  document.getElementById('minute').style.transform = `rotate(${(minutes + seconds/60)*6}deg)`;
+  document.getElementById('hour').style.transform = `rotate(${(hours + minutes/60)*30}deg)`;
+}
+setInterval(updateClock, 50); updateClock();
+</script>
+</body>
+</html>
